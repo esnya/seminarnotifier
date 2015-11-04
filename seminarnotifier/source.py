@@ -40,6 +40,8 @@ class WebSource(Source):
 
         config['url']: soruce URL
 
+        config['verify']: verify SSL certs
+
         config['auth']: authentication
             auth['type']: authentication type (now, to be 'basic')
             auth['username']: username
@@ -47,6 +49,8 @@ class WebSource(Source):
         """
 
         self.url = config.get('url')
+
+        self.verify = config.get('verify', True)
 
         auth = config.get('auth')
         if auth:
@@ -72,6 +76,10 @@ class WebSource(Source):
         """
         from lxml import html
         from urllib2 import HTTPBasicAuthHandler, HTTPPasswordMgrWithDefaultRealm, build_opener, urlopen
+
+        if not self.verify:
+            import ssl
+            ssl._create_default_https_context = ssl._create_unverified_context
 
         url = self.get_url(date)
         if self.auth:
