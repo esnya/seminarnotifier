@@ -69,7 +69,7 @@ class SMTPNotifier(Notifier):
 
         dt = datetime.combine(seminar.date, seminar.time)
 
-        format_values = (seminar.title, '\n'.join(seminar.contents), seminar.place)
+        format_values = (seminar.title, '\n'.join(['  ' + c for c in seminar.contents]), seminar.place)
         datetime_formatter = lambda matches: dt.strftime(matches.group(0))
         datetime_pattern = re.compile('%-?[a-zA-Z]')
 
