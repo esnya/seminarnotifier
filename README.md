@@ -12,19 +12,19 @@ Run once per day day with scheduler system (e.g. crontab).
 
 ### Optional Arguments
 
-`-c`
+`-c<path>`
 :   Short alias for `--config`.
 
-`--log-level|-l`
+`--log-level=<level>` or `-l<level>`
 :   Logging level (e.g. ERROR, INFO, DEBUG).
 
-`--log-file|-f`
-:   Path to file to append logs.
+`--log-file=<path>` or `-f<path>`
+:   Path of file to output logs.
 
 
 ## Configuration
 
-See `config.example.json`. Configuration JSON has four sections. 
+See `config.example.json` for example.
 
 `defaults`
 :   Object of default values when used which is not specified in source.
@@ -41,7 +41,7 @@ See `config.example.json`. Configuration JSON has four sections.
 
 ## Bug, Issue, Pull Requests
 
-[GitHub](https://github.com/ukatama/seminarnotifier/issues)
+[https://github.com/ukatama/seminarnotifier/issues](https://github.com/ukatama/seminarnotifier/issues)
 
 
 ## License
