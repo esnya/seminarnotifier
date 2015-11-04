@@ -76,7 +76,7 @@ def main():
     try:
         run(config_file, int(optdict.get('--advance', optdict.get('-a', 1))))
     except:
-        logging.exception('Uncought exception', exc_info = True)
+        logging.exception('Uncought exception')
         quit(2)
 
 main()
