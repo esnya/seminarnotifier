@@ -21,6 +21,9 @@ Run once per day day with scheduler system (e.g. crontab).
 `--log-file=<path>` or `-f<path>`
 :   Path of file to output logs.
 
+`--advance=<n>` or `-a<n>`
+:   Notify n days in advance.
+
 
 ## Configuration
 

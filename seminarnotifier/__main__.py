@@ -2,7 +2,7 @@
 
 import logging
 
-def run(config_path):
+def run(config_path, days = 1):
     logging.info('Started')
 
     with open(config_path, 'r') as config_file:
@@ -18,8 +18,8 @@ def run(config_path):
         parser = Parser.get(config['parser']['type'], config['parser'])
         notifier = Notifier.get(config['notifier']['type'], config['notifier'])
 
-        now = datetime.now()
-        tomorrow = now + timedelta(days = 1)
+        now = datetime.now().date()
+        tomorrow = now + timedelta(days = days)
 
         logging.info('Initialized')
 
@@ -33,10 +33,14 @@ def run(config_path):
         seminars = [parser.parse_seminar(header, defaults) for header in headers]
         logging.info('%d seminars found' % len(headers))
 
+
         for seminar in [(seminar.title, datetime.combine(seminar.date, seminar.time).isoformat(' '), seminar.place, '/'.join(seminar.contents)) for seminar in seminars]:
             logging.debug('Seminar found: %s, %s, %s, %s' % seminar)
 
-        for seminar in [seminar for seminar in seminars if seminar.date == tomorrow]:
+        tomorrow_seminars = [seminar for seminar in seminars if seminar.date == tomorrow]
+        logging.info('%d seminars found on %s' % (len(tomorrow_seminars), tomorrow))
+
+        for seminar in tomorrow_seminars:
             notifier.notify(seminar)
             logging.info('Notify sent: %s, %s, %s' % (seminar.title, seminar.date, seminar.time))
 
@@ -46,7 +50,7 @@ def main():
     import sys
     from getopt import getopt
 
-    optlist, args = getopt(sys.argv[1:], 'c:l:f:', ['config=', 'log-level=', 'log-file='])
+    optlist, args = getopt(sys.argv[1:], 'c:l:f:a:', ['config=', 'log-level=', 'log-file=', 'advance='])
     optdict = dict(optlist)
 
     config_file = optdict.get('--config', optdict.get('-c'))
@@ -70,7 +74,7 @@ def main():
     logging.basicConfig(**log_config)
 
     try:
-        run(config_file)
+        run(config_file, int(optdict.get('--advance', optdict.get('-a', 1))))
     except:
         logging.exception('Uncought exception', exc_info = True)
         quit(2)
