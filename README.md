@@ -2,10 +2,15 @@
 
 Automated notification sender.
 
+## Requirements
+
+* Python 2.7
+* lxml
+
 ## Usage
 
 ```
-pytohn2 seminarnotifier.py --config=<path to config JSON>
+pytohn2.7 seminarnotifier.py --config=<path to config JSON>
 ```
 
 Run once per day day with scheduler system (e.g. crontab).
@@ -41,6 +46,10 @@ See `config.example.json` for example.
 `notifier`
 :   Sends the notify of seminar. See `seminarnotifier.notifier.SMTPNotifier.__init__()`
 
+
+## Unittest
+
+Run `test.py`
 
 ## Bug, Issue, Pull Requests
 
