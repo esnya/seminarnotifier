@@ -1,4 +1,4 @@
-# SeminarNotifier
+# SeminarNotifier [![Build Status](https://travis-ci.org/ukatama/seminarnotifier.svg)](https://travis-ci.org/ukatama/seminarnotifier)
 
 Automated notification sender.
 
