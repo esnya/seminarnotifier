@@ -2,6 +2,7 @@
 # coding:UTF-8
 
 import re
+import sys
 import unittest
 
 from os import listdir, path
@@ -16,4 +17,6 @@ test_modules = set([t[1] for parent_module in parent_modules for t in parent_mod
 test_suites = [t[1] for test_module in test_modules for t in test_module.__dict__.items() if class_pattern.match(t[0])]
 
 runner = unittest.TextTestRunner()
-runner.run(unittest.TestSuite([unittest.TestLoader().loadTestsFromTestCase(test_suite) for test_suite in test_suites]))
+result = runner.run(unittest.TestSuite([unittest.TestLoader().loadTestsFromTestCase(test_suite) for test_suite in test_suites]))
+
+sys.exit(0 if result.wasSuccessful() else 1)

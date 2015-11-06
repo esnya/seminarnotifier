@@ -52,7 +52,7 @@ class TestSMTPNotifier(unittest.TestCase):
 
         message = calls['sendmail'][3]
         message_body = b64decode(message.split('\n\n')[1].strip())
-        self.assertEqual(message_body, 'Seminar title on April 15 09:15 at A111: \nFoo\nBar\nBaz'.encode('UTF-8'))
+        self.assertEqual(message_body, 'Seminar title on April 15 09:15 at A111: \n  Foo\n  Bar\n  Baz'.encode('UTF-8'))
 
         self.assertEqual(calls['quit'][1:], []);
 
